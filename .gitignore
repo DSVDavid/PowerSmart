@@ -1,0 +1,11 @@
+*/bin/*
+*/obj/*
+
+Services/Identity/Identity.API/bin/*
+Services/Identity/Identity.API/obj/*
+Services/Identity/Identity.Domain/bin/*
+Services/Identity/Identity.Domain/obj/*
+Services/Identity/Identity.Infrastructure/bin/*
+Services/Identity/Identity.Infrastructure/obj/*
+
+.vs/*
