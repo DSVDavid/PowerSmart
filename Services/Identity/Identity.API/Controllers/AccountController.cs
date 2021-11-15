@@ -15,10 +15,12 @@ namespace Identity.API.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
 
+        private readonly ITokenService _tokenService;
       
-        public AccountController(UserManager<AppUser> userManager)
+        public AccountController(UserManager<AppUser> userManager, ITokenService tokenService)
         {
             _userManager = userManager;
+            _tokenService = tokenService;
         }
 
         [HttpPost("login")]
@@ -38,7 +40,7 @@ namespace Identity.API.Controllers
                 return Ok(new SignedInUserCredsDto
                 {
                     UserName = user.UserName,
-                    UserRole = userRole
+                    Token = _tokenService.GenerateToken(user,userRole)
                 });
             }
 

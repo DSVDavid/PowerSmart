@@ -5,25 +5,26 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using APIGateway.Interfaces;
+using Identity.Domain;
+using Identity.Domain.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace APIGateway.Services
+namespace Identity.Infrastructure.Services
 {
     public class TokenService : ITokenService
     {
-        private readonly SymmetricSecurityKey _key;
+       private readonly SymmetricSecurityKey _key;
 
         public TokenService(IConfiguration config)
         {
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
         }
-        public string GenerateToken(string userName, string userRole)
+        public string GenerateToken(AppUser user, string userRole)
         {
              var claims = new List<Claim>{
-                new Claim(ClaimTypes.GivenName, userName),
-                new Claim(ClaimTypes.Role, userRole)
+                new Claim(ClaimTypes.GivenName, user.UserName),
+                new Claim("Role", userRole)
             };
 
             var creds = new SigningCredentials(_key,SecurityAlgorithms.HmacSha512Signature);

@@ -8,7 +8,6 @@ namespace Identity.API.Dtos
     public class SignedInUserCredsDto
     {
         public string UserName { get; internal set; }
-
-        public string UserRole { get; internal set; }
+        public string Token { get; internal set; }
     }
 }

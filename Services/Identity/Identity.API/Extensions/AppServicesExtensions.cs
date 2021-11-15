@@ -1,3 +1,5 @@
+using Identity.Domain.Interfaces;
+using Identity.Infrastructure.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Identity.API.Extensions
@@ -6,9 +8,9 @@ namespace Identity.API.Extensions
     {
         public static IServiceCollection AddAppServices(this IServiceCollection services)
         {
-
-                 return services;
+            services.AddScoped<ITokenService, TokenService>();
+            return services;
         }
-        
+
     }
 }

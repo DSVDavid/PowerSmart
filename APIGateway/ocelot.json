@@ -1,21 +1,39 @@
 {
-    "Routes": [
-      {
-        "DownstreamPathTemplate": "/api/auth/{all}",
-        "DownstreamScheme": "https",
-        "DownstreamHostAndPorts": [
-          {
-            "Host": "localhost",
-            "Port": 5001
-          }
-        ],
-      
-        "UpstreamPathTemplate": "/api/auth/{all}",
-        "UpstreamHttpMethod": [ "Post", "Get" ]
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:5001"
+  },
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/device/{all}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/device/{all}",
+      "UpstreamHttpMethod": ["POST", "GET"],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "user_auth_scheme",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Admin"
       }
-    ],
-    "GlobalConfiguration": {
-      "BaseUrl":  "https://localhost:5001"
-  
+    },
+    {
+      "DownstreamPathTemplate": "/api/account/{all}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5003
+        }
+      ],
+      "UpstreamPathTemplate": "/api/account/{all}",
+      "UpstreamHttpMethod": ["POST", "GET"]
+      
     }
-  }
+  ]
+}

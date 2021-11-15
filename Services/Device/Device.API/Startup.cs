@@ -28,9 +28,18 @@ namespace Device.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
-            services.AddDbContext<DeviceContext>(opt =>{
+
+            services.AddDbContext<DeviceContext>(opt =>
+            {
                 opt.UseSqlServer(Configuration.GetConnectionString("DevicesConnection"));
+            });
+
+            services.AddCors(opts =>
+            {
+                opts.AddPolicy(name: "GatewayPolicy", builder =>
+                {
+                    builder.WithOrigins(Configuration["GatewayUrl"]);
+                });
             });
 
 
@@ -54,6 +63,8 @@ namespace Device.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthorization();
 

@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using APIGateway.Interfaces;
-using APIGateway.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +17,8 @@ namespace APIGateway.Extensions
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer("user_auth_scheme", options =>
             {
+                options.RequireHttpsMetadata = false;
+                options.SaveToken = true;
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
@@ -27,9 +27,6 @@ namespace APIGateway.Extensions
                     ValidateAudience = false,
                 };
             });
-
-
-            services.AddScoped<ITokenService,TokenService>();
 
             return services;
         }
