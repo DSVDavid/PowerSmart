@@ -8,4 +8,11 @@ Services/Identity/Identity.Domain/obj/*
 Services/Identity/Identity.Infrastructure/bin/*
 Services/Identity/Identity.Infrastructure/obj/*
 
+Services/Device/Device.API/bin/*
+Services/Device/Device.API/obj/*
+Services/Device/Device.Domain/bin/*
+Services/Device/Device.Domain/obj/*
+Services/Device/Device.Infrastructure/bin/*
+Services/Device/Device.Infrastructure/obj/*
+
 .vs/*
